@@ -17,6 +17,9 @@ export default {
 			fontFamily: {
 				rubik: ['Rubik', 'sans-serif'],
 			},
+			boxShadow: {
+				authenticationWindow: '3px 3px 10px rgba(0, 0, 0, 0.1)',
+			},
 		},
 	},
 	plugins: [],

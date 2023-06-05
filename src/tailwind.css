@@ -1,3 +1,7 @@
 .authenticationPage {
 	@apply flex items-center justify-center h-[100vh];
 }
+
+.authenticationWindow {
+	@apply bg-White min-w-[400px] min-h-[600px] py-[50px] px-[30px] shadow-authenticationWindow rounded-[10px] flex-col items-center w-[100%];
+}
