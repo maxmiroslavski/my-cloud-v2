@@ -15,7 +15,7 @@
 }
 
 .authenticationInput {
-	@apply p-[10px] bg-LightGray font-normal text-[18px] leading-[21px] outline-none font-rubik rounded-[5px] border-[1px] border-solid border-LightGray transition duration-150;
+	@apply p-[10px] bg-LightGray font-normal text-[18px] leading-[21px] outline-none font-rubik rounded-[5px] border-[1px] border-solid border-LightGray transition duration-200;
 }
 
 .authenticationInput::placeholder {

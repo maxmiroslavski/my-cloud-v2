@@ -1,19 +1,21 @@
 import { Button } from '../../components/Button/Button';
 import { Heading } from '../../components/Heading/Heading';
-import { Paragraph } from '../../components/Paragraph/Paragraph';
 import { Span } from '../../components/Span/Span';
 
-import { RegistrationFormData } from './Registration.interface';
+import { IRegistrationFormData } from './Registration.interface';
+
+import { useFetchPost } from '../../hooks/useFetchPost';
 
 import cn from 'classnames';
-import { motion } from 'framer-motion';
 import { z, ZodType } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
 
 export const Registration = () => {
-	const schema: ZodType<RegistrationFormData> = z.object({
+	const { fetchData } = useFetchPost();
+
+	const schema: ZodType<IRegistrationFormData> = z.object({
 		name: z.string().min(1),
 		email: z.string().email(),
 		password: z.string().min(10).max(30),
@@ -24,12 +26,24 @@ export const Registration = () => {
 		handleSubmit,
 		formState: { errors },
 		reset,
-	} = useForm<RegistrationFormData>({
+	} = useForm<IRegistrationFormData>({
 		resolver: zodResolver(schema),
 	});
 
-	const submitFormHandler = (data: RegistrationFormData) => {
-		console.log(data);
+	const submitFormHandler = (enteredData: IRegistrationFormData) => {
+		console.log(enteredData);
+
+		fetchData(
+			`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${
+				import.meta.env.VITE_FIREBASE_KEY
+			}`,
+			{
+				email: enteredData.email,
+				password: enteredData.password,
+			},
+			{ 'Content-Type': 'application/json' }
+		);
+
 		reset();
 	};
 
@@ -75,14 +89,10 @@ export const Registration = () => {
 							{...register('email')}
 						/>
 						{errors.email && (
-							<p
-								className={cn(
-									errors.name && 'text-ErrorLightRed',
-									'absolute bottom-[-20px] font-light leading-[19px]'
-								)}
-							>
-								Введите Почту
-							</p>
+							<ErrorMessage
+								className="absolute bottom-[-20px]"
+								errorMessage="Введите Почту"
+							/>
 						)}
 					</div>
 
@@ -99,19 +109,15 @@ export const Registration = () => {
 							{...register('password')}
 						/>
 						{errors.password && (
-							<p
-								className={cn(
-									errors.name && 'text-ErrorLightRed',
-									'absolute bottom-[-20px] font-light leading-[19px]'
-								)}
-							>
-								Введите Пароль
-							</p>
+							<ErrorMessage
+								className="absolute bottom-[-20px]"
+								errorMessage="Введите Пароль"
+							/>
 						)}
 					</div>
 
 					<Button className="py-[10px] mt-[50px]" btnSize="large">
-						Войти
+						Создать
 					</Button>
 				</form>
 
