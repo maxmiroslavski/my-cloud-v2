@@ -1,6 +1,5 @@
 import { Button } from '../../components/Button/Button';
 import { Heading } from '../../components/Heading/Heading';
-import { Label } from '../../components/Label/Label';
 import { Paragraph } from '../../components/Paragraph/Paragraph';
 import { Span } from '../../components/Span/Span';
 
@@ -14,7 +13,9 @@ export const Registration = () => {
 
 				<form className="authenticationForm">
 					<div className="authenticationFormElement mt-[30px] mb-[25px] relative">
-						<Label>Имя</Label>
+						<label className="text-[24px] leading-[28px]">
+							Имя
+						</label>
 						<input
 							placeholder="Почта"
 							className={cn('authenticationInput', 'inputError')}
@@ -28,7 +29,9 @@ export const Registration = () => {
 					</div>
 
 					<div className="authenticationFormElement mb-[25px] relative">
-						<Label>Почта</Label>
+						<label className="text-[24px] leading-[28px]">
+							Почта
+						</label>
 						<input
 							placeholder="Почта"
 							className={cn('authenticationInput', 'inputError')}
@@ -42,7 +45,9 @@ export const Registration = () => {
 					</div>
 
 					<div className="authenticationFormElement relative">
-						<Label>Пароль</Label>
+						<label className="text-[24px] leading-[28px]">
+							Пароль
+						</label>
 						<input
 							placeholder="Пароль"
 							className={cn('authenticationInput', 'inputError')}
