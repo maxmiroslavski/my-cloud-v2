@@ -1,5 +1,7 @@
+import { Button } from '../../components/Button/Button';
 import { Heading } from '../../components/Heading/Heading';
 import { Label } from '../../components/Label/Label';
+import { Span } from '../../components/Span/Span';
 
 export const Registration = () => {
 	return (
@@ -30,6 +32,24 @@ export const Registration = () => {
 							placeholder="Пароль"
 							className="authenticationInput"
 						/>
+					</div>
+
+					<Button className="py-[10px]" btnSize="large">
+						Создать
+					</Button>
+
+					<div className="flex items-end gap-[5px]">
+						<Span className="text-Gray" fontSize="18px">
+							Уже есть аккаунт?
+						</Span>
+						<Span className="text-Gray" fontSize="18px">
+							<a
+								href="#"
+								className="text-Primary underline cursor-pointer"
+							>
+								Войти
+							</a>
+						</Span>
 					</div>
 				</form>
 			</div>

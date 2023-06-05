@@ -1,0 +1,15 @@
+.button {
+	@apply inline-block bg-Primary border-none outline-none font-rubik text-White text-[24px] leading-[28px] rounded-[5px] cursor-pointer duration-100;
+}
+
+.button:hover {
+	@apply bg-PrimaryHover;
+}
+
+.large {
+	@apply font-normal w-[100%];
+}
+
+.small {
+	@apply font-normal text-[16px] leading-[19px];
+}
