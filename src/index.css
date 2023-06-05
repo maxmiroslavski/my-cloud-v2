@@ -1,8 +1,7 @@
-* {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap');
 
 :root {
 	--font-family: 'Rubik', sans-serif;
@@ -17,13 +16,15 @@
 	--red: #ff7c7c;
 }
 
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
 body {
 	font-family: var(--font-family);
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 .flex-center {
 	@apply flex justify-center items-center;

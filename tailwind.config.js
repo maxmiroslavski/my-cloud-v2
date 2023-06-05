@@ -14,6 +14,9 @@ export default {
 				LightRed: '#ffe5e5',
 				ErrorLightRed: '#ff9494',
 			},
+			fontFamily: {
+				rubik: ['Rubik', 'sans-serif'],
+			},
 		},
 	},
 	plugins: [],
