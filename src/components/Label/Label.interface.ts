@@ -5,5 +5,5 @@ export interface ILabel
 		LabelHTMLAttributes<HTMLLabelElement>,
 		HTMLLabelElement
 	> {
-	childred: ReactNode;
+	children: ReactNode;
 }

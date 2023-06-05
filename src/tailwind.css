@@ -3,5 +3,25 @@
 }
 
 .authenticationWindow {
-	@apply bg-White min-w-[400px] min-h-[600px] py-[50px] px-[30px] shadow-authenticationWindow rounded-[10px] flex-col items-center w-[100%];
+	@apply bg-White min-w-[400px] min-h-[600px] py-[50px] px-[30px] shadow-authenticationWindow rounded-[10px] flex flex-col items-center;
+}
+
+.authenticationForm {
+	@apply flex flex-col items-center mt-[30px] w-[100%];
+}
+
+.authenticationFormElement {
+	@apply relative flex flex-col gap-[5px] mb-[25px] w-[100%];
+}
+
+.authenticationInput {
+	@apply p-[10px] bg-LightGray font-normal text-[18px] leading-[21px] outline-none font-rubik rounded-[5px] border-[1px] border-solid border-LightGray transition duration-150;
+}
+
+.authenticationInput::placeholder {
+	@apply font-light text-Gray;
+}
+
+.inputError {
+	@apply border-[1px] border-solid border-LightRed;
 }
