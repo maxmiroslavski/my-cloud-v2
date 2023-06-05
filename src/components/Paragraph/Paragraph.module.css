@@ -1,0 +1,11 @@
+.paragraph {
+	@apply font-rubik;
+}
+
+.small {
+	@apply font-light text-[14px] leading-[17px];
+}
+
+.medium {
+	@apply font-light text-[16px] leading-[19px];
+}

@@ -3,15 +3,15 @@
 }
 
 .authenticationWindow {
-	@apply bg-White min-w-[400px] min-h-[600px] py-[50px] px-[30px] shadow-authenticationWindow rounded-[10px] flex flex-col items-center;
+	@apply bg-White min-w-[400px] min-h-[600px] pt-[50px] pb-[30px] px-[30px] shadow-authenticationWindow rounded-[10px] flex flex-col items-center;
 }
 
 .authenticationForm {
-	@apply flex flex-col items-center mt-[30px] w-[100%];
+	@apply flex flex-col items-center  w-[100%];
 }
 
 .authenticationFormElement {
-	@apply relative flex flex-col gap-[5px] mb-[25px] w-[100%];
+	@apply relative flex flex-col gap-[5px] w-[100%];
 }
 
 .authenticationInput {
@@ -23,5 +23,5 @@
 }
 
 .inputError {
-	@apply border-[1px] border-solid border-LightRed;
+	@apply border-[1px] border-solid border-ErrorLightRed;
 }
