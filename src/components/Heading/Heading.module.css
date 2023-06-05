@@ -1,0 +1,15 @@
+.h38px {
+	@apply font-medium text-[38px] leading-[45px];
+}
+
+.h32px {
+	@apply font-medium text-[32px] leading-[38px];
+}
+
+.h24px {
+	@apply font-medium text-[24px] leading-[28px];
+}
+
+.h20px {
+	@apply font-medium text-[20px] leading-[24px];
+}

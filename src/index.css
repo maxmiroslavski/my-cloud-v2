@@ -1,0 +1,30 @@
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+:root {
+	--font-family: 'Rubik', sans-serif;
+	--primary: #8f92f6;
+	--primary-hover: #7b7ff7;
+	--white: #fff;
+	--black: #000;
+	--gray: #717171;
+	--light-gray: #eeeeee;
+	--error-light-red: #ff9494;
+	--light-red: #ffe5e5;
+	--red: #ff7c7c;
+}
+
+body {
+	font-family: var(--font-family);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.flex-center {
+	@apply flex justify-center items-center;
+}
