@@ -3,29 +3,63 @@ import { Heading } from '../../components/Heading/Heading';
 import { Paragraph } from '../../components/Paragraph/Paragraph';
 import { Span } from '../../components/Span/Span';
 
+import { RegistrationFormData } from './Registration.interface';
+
 import cn from 'classnames';
+import { motion } from 'framer-motion';
+import { z, ZodType } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
 
 export const Registration = () => {
+	const schema: ZodType<RegistrationFormData> = z.object({
+		name: z.string().min(1),
+		email: z.string().email(),
+		password: z.string().min(10).max(30),
+	});
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset,
+	} = useForm<RegistrationFormData>({
+		resolver: zodResolver(schema),
+	});
+
+	const submitFormHandler = (data: RegistrationFormData) => {
+		console.log(data);
+		reset();
+	};
+
 	return (
 		<div className="authenticationPage">
 			<div className="authenticationWindow">
 				<Heading fontSize="38px">Регистрация</Heading>
 
-				<form className="authenticationForm">
+				<form
+					onSubmit={handleSubmit(submitFormHandler)}
+					className="authenticationForm"
+				>
 					<div className="authenticationFormElement mt-[30px] mb-[25px] relative">
 						<label className="text-[24px] leading-[28px]">
 							Имя
 						</label>
 						<input
-							placeholder="Почта"
-							className={cn('authenticationInput', 'inputError')}
+							placeholder="Имя Пользователя"
+							className={cn(
+								'authenticationInput',
+								errors.name && 'inputError'
+							)}
+							{...register('name')}
 						/>
-						<Paragraph
-							className="absolute bottom-[-20px]"
-							isError={true}
-						>
-							Введите Имя Пользователя
-						</Paragraph>
+						{errors.name && (
+							<ErrorMessage
+								className="absolute bottom-[-20px]"
+								errorMessage="Введите Имя Пользователя"
+							/>
+						)}
 					</div>
 
 					<div className="authenticationFormElement mb-[25px] relative">
@@ -34,14 +68,22 @@ export const Registration = () => {
 						</label>
 						<input
 							placeholder="Почта"
-							className={cn('authenticationInput', 'inputError')}
+							className={cn(
+								'authenticationInput',
+								errors.email && 'inputError'
+							)}
+							{...register('email')}
 						/>
-						<Paragraph
-							className="absolute bottom-[-20px]"
-							isError={true}
-						>
-							Введите Почту
-						</Paragraph>
+						{errors.email && (
+							<p
+								className={cn(
+									errors.name && 'text-ErrorLightRed',
+									'absolute bottom-[-20px] font-light leading-[19px]'
+								)}
+							>
+								Введите Почту
+							</p>
+						)}
 					</div>
 
 					<div className="authenticationFormElement relative">
@@ -50,14 +92,22 @@ export const Registration = () => {
 						</label>
 						<input
 							placeholder="Пароль"
-							className={cn('authenticationInput', 'inputError')}
+							className={cn(
+								'authenticationInput',
+								errors.password && 'inputError'
+							)}
+							{...register('password')}
 						/>
-						<Paragraph
-							className="absolute bottom-[-20px]"
-							isError={true}
-						>
-							Введите Пароль
-						</Paragraph>
+						{errors.password && (
+							<p
+								className={cn(
+									errors.name && 'text-ErrorLightRed',
+									'absolute bottom-[-20px] font-light leading-[19px]'
+								)}
+							>
+								Введите Пароль
+							</p>
+						)}
 					</div>
 
 					<Button className="py-[10px] mt-[50px]" btnSize="large">

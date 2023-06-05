@@ -1,0 +1,3 @@
+.error {
+	@apply font-light text-[16px] text-ErrorLightRed leading-[19px];
+}
