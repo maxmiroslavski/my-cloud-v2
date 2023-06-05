@@ -1,0 +1,3 @@
+.label {
+	@apply font-normal text-[24px] leading-[28px];
+}
