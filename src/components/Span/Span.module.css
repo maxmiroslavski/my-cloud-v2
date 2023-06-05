@@ -1,0 +1,15 @@
+.span {
+	@apply inline-block;
+}
+
+.s25px {
+	@apply font-normal text-[25px] leading-[30px];
+}
+
+.s18px {
+	@apply font-light text-[18px] leading-[21px];
+}
+
+.s16px {
+	@apply font-light text-[16px] leading-[19px];
+}
