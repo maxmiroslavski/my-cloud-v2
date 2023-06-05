@@ -1,7 +1,10 @@
 import { Button } from '../../components/Button/Button';
 import { Heading } from '../../components/Heading/Heading';
 import { Label } from '../../components/Label/Label';
+import { Paragraph } from '../../components/Paragraph/Paragraph';
 import { Span } from '../../components/Span/Span';
+
+import cn from 'classnames';
 
 export const Registration = () => {
 	return (
@@ -10,32 +13,50 @@ export const Registration = () => {
 				<Heading fontSize="38px">Регистрация</Heading>
 
 				<form className="authenticationForm">
-					<div className="authenticationFormElement mt-[30px] mb-[25px]">
+					<div className="authenticationFormElement mt-[30px] mb-[25px] relative">
 						<Label>Имя</Label>
 						<input
-							placeholder="Имя Пользователя"
-							className="authenticationInput"
+							placeholder="Почта"
+							className={cn('authenticationInput', 'inputError')}
 						/>
+						<Paragraph
+							className="absolute bottom-[-20px]"
+							isError={true}
+						>
+							Введите Имя Пользователя
+						</Paragraph>
 					</div>
 
-					<div className="authenticationFormElement mb-[25px]">
+					<div className="authenticationFormElement mb-[25px] relative">
 						<Label>Почта</Label>
 						<input
 							placeholder="Почта"
-							className="authenticationInput"
+							className={cn('authenticationInput', 'inputError')}
 						/>
+						<Paragraph
+							className="absolute bottom-[-20px]"
+							isError={true}
+						>
+							Введите Почту
+						</Paragraph>
 					</div>
 
-					<div className="authenticationFormElement">
+					<div className="authenticationFormElement relative">
 						<Label>Пароль</Label>
 						<input
 							placeholder="Пароль"
-							className="authenticationInput"
+							className={cn('authenticationInput', 'inputError')}
 						/>
+						<Paragraph
+							className="absolute bottom-[-20px]"
+							isError={true}
+						>
+							Введите Пароль
+						</Paragraph>
 					</div>
 
 					<Button className="py-[10px] mt-[50px]" btnSize="large">
-						Создать
+						Войти
 					</Button>
 				</form>
 
@@ -46,7 +67,7 @@ export const Registration = () => {
 					<Span className="text-Gray" fontSize="18px">
 						<a
 							href="#"
-							className="text-Primary underline underline-offset-[2px] cursor-pointer"
+							className="text-Primary cursor-pointer underline underline-offset-[2px]"
 						>
 							Войти
 						</a>

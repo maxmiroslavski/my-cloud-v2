@@ -1,7 +1,10 @@
 import { Button } from '../../components/Button/Button';
 import { Heading } from '../../components/Heading/Heading';
 import { Label } from '../../components/Label/Label';
+import { Paragraph } from '../../components/Paragraph/Paragraph';
 import { Span } from '../../components/Span/Span';
+
+import cn from 'classnames';
 
 export const Login = () => {
 	return (
@@ -14,16 +17,28 @@ export const Login = () => {
 						<Label>Почта</Label>
 						<input
 							placeholder="Почта"
-							className="authenticationInput inputError"
+							className={cn('authenticationInput', 'inputError')}
 						/>
+						<Paragraph
+							className="absolute bottom-[-20px]"
+							isError={true}
+						>
+							Введите Почту
+						</Paragraph>
 					</div>
 
 					<div className="authenticationFormElement relative">
 						<Label>Пароль</Label>
 						<input
 							placeholder="Пароль"
-							className="authenticationInput"
+							className={cn('authenticationInput', 'inputError')}
 						/>
+						<Paragraph
+							className="absolute bottom-[-20px]"
+							isError={true}
+						>
+							Введите Пароль
+						</Paragraph>
 					</div>
 
 					<Button className="py-[10px] mt-[50px]" btnSize="large">

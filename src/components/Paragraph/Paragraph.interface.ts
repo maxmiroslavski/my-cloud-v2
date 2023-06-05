@@ -6,5 +6,6 @@ export interface IParagraph
 		HTMLParagraphElement
 	> {
 	children: ReactNode;
-	fontSize: '16px' | '14px';
+	fontSize?: '16px' | '14px';
+	isError?: boolean;
 }

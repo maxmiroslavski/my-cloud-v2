@@ -9,3 +9,7 @@
 .medium {
 	@apply font-light text-[16px] leading-[19px];
 }
+
+.error {
+	@apply text-ErrorLightRed;
+}
