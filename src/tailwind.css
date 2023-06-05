@@ -1,0 +1,3 @@
+.authenticationPage {
+	@apply flex items-center justify-center h-[100vh];
+}
