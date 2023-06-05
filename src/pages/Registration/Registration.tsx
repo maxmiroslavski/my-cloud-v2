@@ -11,9 +11,11 @@ import { z, ZodType } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
+import { useNavigate } from 'react-router-dom';
 
 export const Registration = () => {
-	const { fetchData } = useFetchPost();
+	const { fetchData, isError } = useFetchPost();
+	const navigate = useNavigate();
 
 	const schema: ZodType<IRegistrationFormData> = z.object({
 		name: z.string().min(1),
@@ -30,7 +32,7 @@ export const Registration = () => {
 		resolver: zodResolver(schema),
 	});
 
-	const submitFormHandler = (enteredData: IRegistrationFormData) => {
+	const submitFormHandler = async (enteredData: IRegistrationFormData) => {
 		console.log(enteredData);
 
 		fetchData(
@@ -44,7 +46,13 @@ export const Registration = () => {
 			{ 'Content-Type': 'application/json' }
 		);
 
+		if (isError === null || isError) {
+			return;
+		}
+
 		reset();
+
+		navigate('/login');
 	};
 
 	return (
