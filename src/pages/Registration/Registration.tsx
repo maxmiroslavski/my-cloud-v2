@@ -1,11 +1,8 @@
 import { Button } from '../../components/Button/Button';
 import { Heading } from '../../components/Heading/Heading';
 import { Span } from '../../components/Span/Span';
-
 import { IRegistrationFormData } from './Registration.interface';
-
 import { useFetchPost } from '../../hooks/useFetchPost';
-
 import cn from 'classnames';
 import { z, ZodType } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,7 +11,6 @@ import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
 import { useNavigate } from 'react-router-dom';
 
 export const Registration = () => {
-	const { fetchData, isError } = useFetchPost();
 	const navigate = useNavigate();
 
 	const schema: ZodType<IRegistrationFormData> = z.object({
@@ -27,15 +23,15 @@ export const Registration = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-		reset,
 	} = useForm<IRegistrationFormData>({
 		resolver: zodResolver(schema),
 	});
 
+	const { isLoading, isError, postData } = useFetchPost();
 	const submitFormHandler = async (enteredData: IRegistrationFormData) => {
 		console.log(enteredData);
 
-		fetchData(
+		postData(
 			`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${
 				import.meta.env.VITE_FIREBASE_KEY
 			}`,
@@ -43,16 +39,9 @@ export const Registration = () => {
 				email: enteredData.email,
 				password: enteredData.password,
 			},
-			{ 'Content-Type': 'application/json' }
+			{ 'Content-Type': 'application/json' },
+			'/login'
 		);
-
-		if (isError === null || isError) {
-			return;
-		}
-
-		reset();
-
-		navigate('/login');
 	};
 
 	return (

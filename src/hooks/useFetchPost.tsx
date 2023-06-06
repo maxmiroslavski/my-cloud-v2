@@ -1,26 +1,42 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const useFetchPost = () => {
 	const [isError, setIsError] = useState<boolean | null>(null);
+	const [isLoading, setIsLoading] = useState(false);
+	const navigate = useNavigate();
 
-	const fetchData = async (url: string, body: {}, headers: {}) => {
+	const postData = async (
+		url: string,
+		body: {},
+		headers: {},
+		navigateTo?: string
+	) => {
+		setIsLoading(true);
+
 		const res = await fetch(url, {
 			method: 'POST',
 			body: JSON.stringify(body),
 			headers: headers,
 		});
 
+		console.log(res);
+
 		if (!res.ok) {
 			setIsError(true);
+			setIsLoading(false);
+			return;
 		}
 
 		setIsError(false);
+		setIsLoading(false);
 
-		console.log(res);
+		navigateTo && navigate(navigateTo);
 	};
 
 	return {
-		fetchData,
+		postData,
 		isError,
+		isLoading,
 	};
 };
