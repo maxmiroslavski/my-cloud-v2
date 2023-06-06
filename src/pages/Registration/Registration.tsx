@@ -1,16 +1,23 @@
 import { Button } from '../../components/Button/Button';
 import { Heading } from '../../components/Heading/Heading';
 import { Span } from '../../components/Span/Span';
+import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
+import { CircleLoader } from '../../components/CircleLoader/CircleLoader';
+
 import { IRegistrationFormData } from './Registration.interface';
-import { useFetchPost } from '../../hooks/useFetchPost';
+
 import cn from 'classnames';
 import { z, ZodType } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
-import { CircleLoader } from '../../components/CircleLoader/CircleLoader';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const Registration = () => {
+	const navigate = useNavigate();
+
 	const schema: ZodType<IRegistrationFormData> = z.object({
 		name: z.string().min(1),
 		email: z.string().email(),
@@ -25,29 +32,53 @@ export const Registration = () => {
 		resolver: zodResolver(schema),
 	});
 
-	const { isLoading, isError, postData } = useFetchPost();
+	const [fetchData, setFetchData] = useState<{
+		isError: boolean;
+		isLoading: boolean;
+	}>({
+		isError: false,
+		isLoading: false,
+	});
 
 	const submitFormHandler = async (enteredData: IRegistrationFormData) => {
-		console.log(enteredData);
+		setFetchData({ ...fetchData, isLoading: true });
 
-		console.log(isError);
-
-		postData(
+		const res = await fetch(
 			`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${
 				import.meta.env.VITE_FIREBASE_KEY
 			}`,
 			{
-				email: enteredData.email,
-				password: enteredData.password,
-			},
-			{ 'Content-Type': 'application/json' },
-			'/login'
+				method: 'POST',
+				body: JSON.stringify({
+					email: enteredData.email,
+					password: enteredData.password,
+				}),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}
 		);
+
+		if (!res.ok) {
+			setFetchData({ ...fetchData, isError: true });
+			setFetchData({ ...fetchData, isLoading: false });
+			return;
+		}
+
+		setFetchData({ ...fetchData, isError: false });
+		setFetchData({ ...fetchData, isLoading: false });
+
+		navigate('/login');
 	};
 
 	return (
 		<div className="authenticationPage">
-			<div className="authenticationWindow">
+			<motion.div
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				transition={{ duration: 0.2 }}
+				className="authenticationWindow"
+			>
 				<Heading fontSize="38px">Регистрация</Heading>
 
 				<form
@@ -115,14 +146,14 @@ export const Registration = () => {
 					</div>
 
 					<div className="w-[100%] relative text-center mt-[50px]">
-						{!isLoading ? (
+						{!fetchData.isLoading ? (
 							<Button className="py-[10px]" btnSize="large">
 								Создать
 							</Button>
 						) : (
 							<CircleLoader className="m-auto" />
 						)}
-						{isError && (
+						{fetchData.isError && (
 							<ErrorMessage
 								className="absolute bottom-[-20px] left-0 right-0"
 								errorMessage="Такой пользователь уже существет"
@@ -136,15 +167,15 @@ export const Registration = () => {
 						Уже есть аккаунт?
 					</Span>
 					<Span className="text-Gray" fontSize="18px">
-						<a
-							href="#"
+						<Link
+							to="/login"
 							className="text-Primary cursor-pointer underline underline-offset-[2px]"
 						>
 							Войти
-						</a>
+						</Link>
 					</Span>
 				</div>
-			</div>
+			</motion.div>
 		</div>
 	);
 };

@@ -1,6 +1,8 @@
 import { Button } from '../../components/Button/Button';
 import { Heading } from '../../components/Heading/Heading';
 import { Span } from '../../components/Span/Span';
+import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
+import { CircleLoader } from '../../components/CircleLoader/CircleLoader';
 
 import { ILoginFormData } from './Login.interface';
 
@@ -8,9 +10,14 @@ import cn from 'classnames';
 import { z, ZodType } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
+	const navigate = useNavigate();
+
 	const schema: ZodType<ILoginFormData> = z.object({
 		email: z.string().email(),
 		password: z.string().min(10).max(30),
@@ -20,19 +27,60 @@ export const Login = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-		reset,
 	} = useForm<ILoginFormData>({
 		resolver: zodResolver(schema),
 	});
 
-	const submitFormHandler = (data: ILoginFormData) => {
-		console.log(data);
-		reset();
+	const [fetchData, setFetchData] = useState<{
+		isError: boolean;
+		isLoading: boolean;
+	}>({
+		isError: false,
+		isLoading: false,
+	});
+
+	const submitFormHandler = async (enteredData: ILoginFormData) => {
+		setFetchData({ ...fetchData, isLoading: true });
+
+		const res = await fetch(
+			`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${
+				import.meta.env.VITE_FIREBASE_KEY
+			}`,
+			{
+				method: 'POST',
+				body: JSON.stringify({
+					email: enteredData.email,
+					password: enteredData.password,
+					returnSecureToken: true,
+				}),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}
+		);
+
+		if (!res.ok) {
+			setFetchData({ ...fetchData, isError: true });
+			setFetchData({ ...fetchData, isLoading: false });
+			return;
+		}
+
+		const resData = await res.json();
+
+		console.log(resData.idToken);
+
+		setFetchData({ ...fetchData, isError: false });
+		setFetchData({ ...fetchData, isLoading: false });
 	};
 
 	return (
 		<div className="authenticationPage">
-			<div className="authenticationWindow">
+			<motion.div
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				transition={{ duration: 0.2 }}
+				className="authenticationWindow"
+			>
 				<Heading fontSize="38px">Вход</Heading>
 
 				<form
@@ -54,7 +102,7 @@ export const Login = () => {
 						{errors.email && (
 							<ErrorMessage
 								className="absolute bottom-[-20px]"
-								errorMessage="Введите Почту"
+								errorMessage="Введите Имя Пользователя"
 							/>
 						)}
 					</div>
@@ -79,9 +127,21 @@ export const Login = () => {
 						)}
 					</div>
 
-					<Button className="py-[10px] mt-[50px]" btnSize="large">
-						Войти
-					</Button>
+					<div className="w-[100%] relative text-center mt-[50px]">
+						{!fetchData.isLoading ? (
+							<Button className="py-[10px]" btnSize="large">
+								Войти
+							</Button>
+						) : (
+							<CircleLoader className="m-auto" />
+						)}
+						{fetchData.isError && (
+							<ErrorMessage
+								className="absolute bottom-[-20px] left-0 right-0"
+								errorMessage="Неверная почта или пароль"
+							/>
+						)}
+					</div>
 				</form>
 
 				<div className="flex items-end gap-[5px] grow-[1]">
@@ -89,15 +149,15 @@ export const Login = () => {
 						Еще нет аккаунта?
 					</Span>
 					<Span className="text-Gray" fontSize="18px">
-						<a
-							href="#"
+						<Link
+							to="/registration"
 							className="text-Primary cursor-pointer underline underline-offset-[2px]"
 						>
 							Создать
-						</a>
+						</Link>
 					</Span>
 				</div>
-			</div>
+			</motion.div>
 		</div>
 	);
 };
