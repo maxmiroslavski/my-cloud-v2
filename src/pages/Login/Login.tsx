@@ -31,16 +31,12 @@ export const Login = () => {
 		resolver: zodResolver(schema),
 	});
 
-	const [fetchData, setFetchData] = useState<{
-		isError: boolean;
-		isLoading: boolean;
-	}>({
-		isError: false,
-		isLoading: false,
-	});
+	const [isError, setIsError] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const submitFormHandler = async (enteredData: ILoginFormData) => {
-		setFetchData({ ...fetchData, isLoading: true });
+		setIsLoading(true);
+		setIsError(false);
 
 		const res = await fetch(
 			`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${
@@ -59,9 +55,11 @@ export const Login = () => {
 			}
 		);
 
+		console.log(res);
+
 		if (!res.ok) {
-			setFetchData({ ...fetchData, isError: true });
-			setFetchData({ ...fetchData, isLoading: false });
+			setIsError(true);
+			setIsLoading(false);
 			return;
 		}
 
@@ -69,9 +67,11 @@ export const Login = () => {
 
 		console.log(resData.idToken);
 
-		setFetchData({ ...fetchData, isError: false });
-		setFetchData({ ...fetchData, isLoading: false });
+		setIsError(false);
+		setIsLoading(false);
 	};
+
+	console.log(isError);
 
 	return (
 		<div className="authenticationPage">
@@ -128,14 +128,14 @@ export const Login = () => {
 					</div>
 
 					<div className="w-[100%] relative text-center mt-[50px]">
-						{!fetchData.isLoading ? (
+						{!isLoading ? (
 							<Button className="py-[10px]" btnSize="large">
 								Войти
 							</Button>
 						) : (
 							<CircleLoader className="m-auto" />
 						)}
-						{fetchData.isError && (
+						{isError && (
 							<ErrorMessage
 								className="absolute bottom-[-20px] left-0 right-0"
 								errorMessage="Неверная почта или пароль"
