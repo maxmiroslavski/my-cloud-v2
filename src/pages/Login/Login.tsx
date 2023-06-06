@@ -67,8 +67,12 @@ export const Login = () => {
 
 		console.log(resData.idToken);
 
+		sessionStorage.setItem('idToken', resData.idToken);
+
 		setIsError(false);
 		setIsLoading(false);
+
+		navigate('/store');
 	};
 
 	console.log(isError);

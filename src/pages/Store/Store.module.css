@@ -1,0 +1,3 @@
+.wrapper {
+	@apply grid grid-cols-[260px_1fr] grid-rows-[1fr] min-h-[100vh];
+}
