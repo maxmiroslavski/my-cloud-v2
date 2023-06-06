@@ -2,9 +2,10 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { Login } from './pages/Login/Login';
 import { Registration } from './pages/Registration/Registration';
 import { Store } from './pages/Store/Store';
+import { useAppSelector } from './hooks/useAppSelector';
 
 export const App = () => {
-	const token = sessionStorage.getItem('idToken');
+	const token = useAppSelector((state) => state.auth.token);
 
 	return (
 		<>

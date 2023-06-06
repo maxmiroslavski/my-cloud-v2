@@ -14,9 +14,12 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { login } from '../../store/authSlice';
 
 export const Login = () => {
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 
 	const schema: ZodType<ILoginFormData> = z.object({
 		email: z.string().email(),
@@ -71,6 +74,8 @@ export const Login = () => {
 
 		setIsError(false);
 		setIsLoading(false);
+
+		dispatch(login(resData.idToken));
 
 		navigate('/store');
 	};

@@ -25,3 +25,7 @@
 .inputError {
 	@apply border-[1px] border-solid border-ErrorLightRed;
 }
+
+.profileButton {
+	@apply w-[50px] h-[50px] bg-Primary rounded-full text-[31px] text-White font-medium outline-none duration-150 flex items-center justify-center;
+}

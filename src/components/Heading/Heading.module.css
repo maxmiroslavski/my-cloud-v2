@@ -7,9 +7,9 @@
 }
 
 .h24px {
-	@apply font-medium text-[24px] leading-[28px];
+	@apply font-normal text-[24px] leading-[28px];
 }
 
 .h20px {
-	@apply font-medium text-[20px] leading-[24px];
+	@apply font-normal text-[20px] leading-[24px];
 }

@@ -7,7 +7,7 @@
 }
 
 .s18px {
-	@apply font-normal text-[18px] leading-[21px];
+	@apply font-light text-[18px] leading-[21px];
 }
 
 .s16px {
