@@ -13,6 +13,7 @@ export const useFetchPost = () => {
 		navigateTo?: string
 	) => {
 		setIsLoading(true);
+		setIsError(false);
 
 		const res = await fetch(url, {
 			method: 'POST',

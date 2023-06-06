@@ -1,0 +1,7 @@
+.container {
+	@apply relative w-12 h-12;
+}
+
+.circle {
+	@apply block w-12 h-12 border-[0.5em] border-LightGray border-t-[0.5em] border-t-Primary rounded-full absolute top-0 left-0;
+}

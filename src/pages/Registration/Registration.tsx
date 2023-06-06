@@ -8,11 +8,9 @@ import { z, ZodType } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
-import { useNavigate } from 'react-router-dom';
+import { CircleLoader } from '../../components/CircleLoader/CircleLoader';
 
 export const Registration = () => {
-	const navigate = useNavigate();
-
 	const schema: ZodType<IRegistrationFormData> = z.object({
 		name: z.string().min(1),
 		email: z.string().email(),
@@ -28,8 +26,11 @@ export const Registration = () => {
 	});
 
 	const { isLoading, isError, postData } = useFetchPost();
+
 	const submitFormHandler = async (enteredData: IRegistrationFormData) => {
 		console.log(enteredData);
+
+		console.log(isError);
 
 		postData(
 			`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${
@@ -113,9 +114,21 @@ export const Registration = () => {
 						)}
 					</div>
 
-					<Button className="py-[10px] mt-[50px]" btnSize="large">
-						Создать
-					</Button>
+					<div className="w-[100%] relative text-center mt-[50px]">
+						{!isLoading ? (
+							<Button className="py-[10px]" btnSize="large">
+								Создать
+							</Button>
+						) : (
+							<CircleLoader className="m-auto" />
+						)}
+						{isError && (
+							<ErrorMessage
+								className="absolute bottom-[-20px] left-0 right-0"
+								errorMessage="Такой пользователь уже существет"
+							/>
+						)}
+					</div>
 				</form>
 
 				<div className="flex items-end gap-[5px] grow-[1]">
