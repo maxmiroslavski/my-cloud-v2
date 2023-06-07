@@ -77,7 +77,7 @@ export const Login = () => {
 		sessionStorage.setItem('email', resData.email);
 		dispatch(login(resData.idToken));
 
-		navigate('/store');
+		navigate('my-cloud-v2/store');
 	};
 
 	console.log(isError);
@@ -159,7 +159,7 @@ export const Login = () => {
 					</Span>
 					<Span className="text-Gray" fontSize="18px">
 						<Link
-							to="/registration"
+							to="my-cloud-v2/registration"
 							className="text-Primary cursor-pointer underline underline-offset-[2px]"
 						>
 							Создать

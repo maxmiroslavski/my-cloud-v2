@@ -163,7 +163,7 @@ export const Registration = () => {
 					</Span>
 					<Span className="text-Gray" fontSize="18px">
 						<Link
-							to="/login"
+							to="my-cloud-v2/login"
 							className="text-Primary cursor-pointer underline underline-offset-[2px]"
 						>
 							Войти

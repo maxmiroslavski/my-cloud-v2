@@ -12,12 +12,17 @@ export const App = () => {
 		<>
 			<Routes>
 				<Route
-					path="/"
+					path="my-cloud-v2/"
 					element={<Navigate replace to="/registration" />}
 				/>
-				<Route path="/registration" element={<Registration />} />
-				<Route path="/login" element={<Login />} />
-				{token && <Route path="/store" element={<Store />} />}
+				<Route
+					path="my-cloud-v2/registration"
+					element={<Registration />}
+				/>
+				<Route path="my-cloud-v2/login" element={<Login />} />
+				{token && (
+					<Route path="my-cloud-v2/store" element={<Store />} />
+				)}
 			</Routes>
 		</>
 	);
