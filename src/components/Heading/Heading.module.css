@@ -3,7 +3,7 @@
 }
 
 .h32px {
-	@apply font-medium text-[32px] leading-[38px];
+	@apply font-normal text-[32px] leading-[38px];
 }
 
 .h24px {

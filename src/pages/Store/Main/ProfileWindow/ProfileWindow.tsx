@@ -1,11 +1,11 @@
-import { Button } from '../../../components/Button/Button';
-import { Heading } from '../../../components/Heading/Heading';
-import { Span } from '../../../components/Span/Span';
+import { Button } from '../../../../components/Button/Button';
+import { Heading } from '../../../../components/Heading/Heading';
+import { Span } from '../../../../components/Span/Span';
 
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { logout } from '../../../store/authSlice';
-import { toggleProfileWindow } from '../../../store/uiSlice';
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { logout } from '../../../../store/authSlice';
+import { toggleProfileWindow } from '../../../../store/uiSlice';
 import { motion } from 'framer-motion';
 
 export const ProfileWindow = () => {

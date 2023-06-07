@@ -5,7 +5,8 @@ import { Store } from './pages/Store/Store';
 import { useAppSelector } from './hooks/useAppSelector';
 
 export const App = () => {
-	const token = useAppSelector((state) => state.auth.token);
+	useAppSelector((state) => state.auth.token);
+	const token = sessionStorage.getItem('idToken');
 
 	return (
 		<>

@@ -1,8 +1,10 @@
-import { ProfileWindow } from '../ProfileWindow/ProfileWindow';
+import { ProfileWindow } from './ProfileWindow/ProfileWindow';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { toggleProfileWindow } from '../../../store/uiSlice';
 import { AnimatePresence } from 'framer-motion';
+
+import { Files } from './Files/Files';
 
 export const Main = () => {
 	const dispatch = useAppDispatch();
@@ -18,8 +20,9 @@ export const Main = () => {
 					M
 				</button>
 			</div>
-
 			<AnimatePresence>{showWindow && <ProfileWindow />}</AnimatePresence>
+
+			<Files />
 		</div>
 	);
 };

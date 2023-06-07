@@ -2,8 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: {
 	token: string | null;
+	email: string | null;
 } = {
-	token: null,
+	token: '',
+	email: '',
 };
 
 const authSlice = createSlice({
@@ -13,14 +15,14 @@ const authSlice = createSlice({
 		login(state, action) {
 			const token = action.payload;
 			sessionStorage.setItem('idToken', token);
-			state.token = sessionStorage.getItem('idToken');
+			state.token = token;
 		},
 		logout(state) {
 			sessionStorage.clear();
 			state.token = null;
 		},
-		getUserEmail(_, action) {
-			sessionStorage.setItem('userEmail', action.payload);
+		getUserEmail(state, action) {
+			state.email = action.payload;
 		},
 	},
 });

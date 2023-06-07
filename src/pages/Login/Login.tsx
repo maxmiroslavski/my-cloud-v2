@@ -15,7 +15,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { login } from '../../store/authSlice';
+import { login, getUserEmail } from '../../store/authSlice';
 
 export const Login = () => {
 	const navigate = useNavigate();
@@ -68,13 +68,13 @@ export const Login = () => {
 
 		const resData = await res.json();
 
-		console.log(resData.idToken);
-
-		sessionStorage.setItem('idToken', resData.idToken);
+		console.log(resData);
 
 		setIsError(false);
 		setIsLoading(false);
 
+		sessionStorage.setItem('idToken', resData.idToken);
+		sessionStorage.setItem('email', resData.email);
 		dispatch(login(resData.idToken));
 
 		navigate('/store');
@@ -111,7 +111,7 @@ export const Login = () => {
 						{errors.email && (
 							<ErrorMessage
 								className="absolute bottom-[-20px]"
-								errorMessage="Введите Имя Пользователя"
+								errorMessage="Введите Почту"
 							/>
 						)}
 					</div>
@@ -131,7 +131,7 @@ export const Login = () => {
 						{errors.password && (
 							<ErrorMessage
 								className="absolute bottom-[-20px]"
-								errorMessage="Введите Пароль"
+								errorMessage="Введите Пароль (От 10 до 30 Символов)"
 							/>
 						)}
 					</div>

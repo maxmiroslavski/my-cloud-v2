@@ -135,7 +135,7 @@ export const Registration = () => {
 						{errors.password && (
 							<ErrorMessage
 								className="absolute bottom-[-20px]"
-								errorMessage="Введите Пароль"
+								errorMessage="Введите Пароль (От 10 до 30 Символов)"
 							/>
 						)}
 					</div>
