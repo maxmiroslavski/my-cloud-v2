@@ -2,8 +2,6 @@ import { Span } from '../../../../components/Span/Span';
 import downloadIcon from '../../../../assets/downloadIcon.svg';
 import deleteIcon from '../../../../assets/deleteIcon.svg';
 import fileIcon from '../../../../assets/fileIcon.svg';
-import { storage } from '../../../../config/firebase';
-import { getDownloadURL, ref, getBlob } from 'firebase/storage';
 import { saveAs } from 'file-saver';
 
 export const FileCard = ({ url, name }: { url: string; name: string }) => {

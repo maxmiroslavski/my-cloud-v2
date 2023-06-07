@@ -21,11 +21,8 @@ const authSlice = createSlice({
 			sessionStorage.clear();
 			state.token = null;
 		},
-		getUserEmail(state, action) {
-			state.email = action.payload;
-		},
 	},
 });
-export const { login, logout, getUserEmail } = authSlice.actions;
+export const { login, logout } = authSlice.actions;
 
 export { authSlice };

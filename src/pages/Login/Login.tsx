@@ -15,7 +15,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { login, getUserEmail } from '../../store/authSlice';
+import { login } from '../../store/authSlice';
 
 export const Login = () => {
 	const navigate = useNavigate();
