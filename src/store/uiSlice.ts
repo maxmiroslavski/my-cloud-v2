@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	showProfileWindow: false,
+	rerenderPage: true,
 };
 
 const uiSlice = createSlice({
@@ -11,8 +12,11 @@ const uiSlice = createSlice({
 		toggleProfileWindow(state) {
 			state.showProfileWindow = !state.showProfileWindow;
 		},
+		rerenderPage(state) {
+			state.rerenderPage = !state.rerenderPage;
+		},
 	},
 });
-export const { toggleProfileWindow } = uiSlice.actions;
+export const { toggleProfileWindow, rerenderPage } = uiSlice.actions;
 
 export { uiSlice };

@@ -3,9 +3,11 @@ import downloadIcon from '../../../../assets/downloadIcon.svg';
 import deleteIcon from '../../../../assets/deleteIcon.svg';
 import fileIcon from '../../../../assets/fileIcon.svg';
 import { downloadFile } from '../../../../functions/downloadFile';
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { rerenderPage } from '../../../../store/uiSlice';
 
 export const FileCard = ({ url, name }: { url: string; name: string }) => {
-	console.log(url);
+	const dispatch = useAppDispatch();
 
 	const dowloadFileHandler = async () => {
 		const res = await fetch(url);
@@ -17,6 +19,16 @@ export const FileCard = ({ url, name }: { url: string; name: string }) => {
 		console.log(blob);
 
 		downloadFile(blob, name);
+	};
+
+	const deleteFileHandler = async () => {
+		const res = await fetch(url, { method: 'DELETE' });
+
+		console.log(res);
+
+		if (!res.ok) return;
+
+		dispatch(rerenderPage());
 	};
 
 	return (
@@ -38,7 +50,7 @@ export const FileCard = ({ url, name }: { url: string; name: string }) => {
 						<img className="w-[25px]" src={downloadIcon} />
 					</button>
 
-					<button>
+					<button onClick={deleteFileHandler}>
 						<img className="w-[25px] mb-[2px]" src={deleteIcon} />
 					</button>
 				</div>
