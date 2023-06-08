@@ -10,8 +10,6 @@ export const UploadFile = ({ className, ...props }: IUploadFile) => {
 	const dispatch = useAppDispatch();
 	const email = sessionStorage.getItem('email');
 
-	console.log(ref(storage, ''));
-
 	const onChangeHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files === null) return;
 

@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
 	showProfileWindow: false,
 	rerenderPage: true,
+	filesAmount: 0,
 };
 
 const uiSlice = createSlice({
@@ -15,8 +16,12 @@ const uiSlice = createSlice({
 		rerenderPage(state) {
 			state.rerenderPage = !state.rerenderPage;
 		},
+		setFilesAmount(state, action) {
+			state.filesAmount = action.payload;
+		},
 	},
 });
-export const { toggleProfileWindow, rerenderPage } = uiSlice.actions;
+export const { toggleProfileWindow, rerenderPage, setFilesAmount } =
+	uiSlice.actions;
 
 export { uiSlice };

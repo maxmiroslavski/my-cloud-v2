@@ -29,3 +29,11 @@
 .profileButton {
 	@apply w-[50px] h-[50px] bg-Primary rounded-full text-[31px] text-White font-medium outline-none duration-150 flex items-center justify-center;
 }
+
+.cardPreviewImage {
+	@apply h-[140px] w-[100%];
+}
+
+.cardPreviewOther {
+	@apply h-[140px] w-[100%] flex items-center justify-center bg-LightGray;
+}
