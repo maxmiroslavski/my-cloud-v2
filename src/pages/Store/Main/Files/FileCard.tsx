@@ -8,6 +8,8 @@ import { rerenderPage } from '../../../../store/uiSlice';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { addFile } from '../../../../store/filesSlice';
+import { showLoading } from '../../../../store/uiSlice';
+import { getLoadingMessage } from '../../../../store/uiSlice';
 
 export const FileCard = ({
 	url,
@@ -64,11 +66,15 @@ export const FileCard = ({
 	};
 
 	const deleteFileHandler = async () => {
+		dispatch(showLoading(true));
+		dispatch(getLoadingMessage('Удаление Файла'));
+
 		const res = await fetch(url, { method: 'DELETE' });
 
 		if (!res.ok) return;
 
 		dispatch(rerenderPage());
+		dispatch(showLoading(true));
 	};
 
 	return (
@@ -79,7 +85,6 @@ export const FileCard = ({
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
-					layout
 					className="h-[200px] w-[250px] bg-White p-[10px]"
 				>
 					<div

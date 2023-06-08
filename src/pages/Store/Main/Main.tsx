@@ -21,6 +21,7 @@ export const Main = () => {
 				</button>
 			</div>
 			<AnimatePresence>{showWindow && <ProfileWindow />}</AnimatePresence>
+			<AnimatePresence></AnimatePresence>
 
 			<Files />
 		</div>

@@ -10,6 +10,8 @@ import { useAppSelector } from '../../../../hooks/useAppSelector';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
 import { AnimatePresence } from 'framer-motion';
 import { setFilesAmount } from '../../../../store/uiSlice';
+import { showLoading } from '../../../../store/uiSlice';
+import { getLoadingMessage } from '../../../../store/uiSlice';
 
 export const Files = () => {
 	const dispatch = useAppDispatch();
@@ -21,6 +23,8 @@ export const Files = () => {
 		useState<{ id: string; url: string; name: string }[]>();
 
 	const getData = async () => {
+		dispatch(showLoading(true));
+
 		const res = await listAll(ref(storage, `${email}`));
 
 		console.log(res);
@@ -37,6 +41,7 @@ export const Files = () => {
 		setStoreItems(arr);
 
 		dispatch(setFilesAmount(arr.length));
+		dispatch(showLoading(false));
 	};
 
 	useEffect(() => {

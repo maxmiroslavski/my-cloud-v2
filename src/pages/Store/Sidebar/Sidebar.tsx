@@ -4,8 +4,12 @@ import { Span } from '../../../components/Span/Span';
 import myCloudIcon from '../../../assets/myCloudIcon.svg';
 import cloudIcon from '../../../assets/cloudIcon.svg';
 import { UploadFile } from './UploadFile/UploadFile';
+import { useAppSelector } from '../../../hooks/useAppSelector';
 
 export const Sidebar = () => {
+	const filesAmount = useAppSelector(
+		(state) => state.ui.filesAmount
+	).toString();
 	return (
 		<div className="bg-White p-[20px] ">
 			<div className="flex gap-[10px] items-center">
@@ -26,11 +30,14 @@ export const Sidebar = () => {
 
 			<div className="mt-[20px]">
 				<Span className="text-Gray" fontSize="18px">
-					10 / 20 Файлов
+					{filesAmount} / 20 Файлов
 				</Span>
 
 				<div className="relative bg-LightGray w-[100%] h-[6px] rounded-[5px] mt-[10px]">
-					<div className="absolute bg-Primary w-[50%] h-[6px] rounded-[5px]" />
+					<div
+						className={`absolute bg-Primary h-[6px] rounded-[5px]  duration-200`}
+						style={{ width: `calc(5% * ${filesAmount})` }}
+					/>
 				</div>
 			</div>
 		</div>
