@@ -18,6 +18,8 @@ export const Files = () => {
 
 			const arr = [];
 
+			console.log(res.items[0]);
+
 			for (const item of res.items) {
 				arr.push({
 					id: v4(),

@@ -2,11 +2,21 @@ import { Span } from '../../../../components/Span/Span';
 import downloadIcon from '../../../../assets/downloadIcon.svg';
 import deleteIcon from '../../../../assets/deleteIcon.svg';
 import fileIcon from '../../../../assets/fileIcon.svg';
-import { saveAs } from 'file-saver';
+import { downloadFile } from '../../../../functions/downloadFile';
 
 export const FileCard = ({ url, name }: { url: string; name: string }) => {
+	console.log(url);
+
 	const dowloadFileHandler = async () => {
-		saveAs(url, name);
+		const res = await fetch(url);
+
+		console.log(res);
+
+		const blob = await res.blob();
+
+		console.log(blob);
+
+		downloadFile(blob, name);
 	};
 
 	return (
