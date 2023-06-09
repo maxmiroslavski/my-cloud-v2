@@ -6,9 +6,7 @@ import { downloadFile } from '../../../../functions/downloadFile';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
 import { rerenderPage } from '../../../../store/uiSlice';
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { addFile } from '../../../../store/filesSlice';
-import { showLoading } from '../../../../store/uiSlice';
+import { motion } from 'framer-motion';
 import { getLoadingMessage } from '../../../../store/uiSlice';
 
 export const FileCard = ({
@@ -42,7 +40,7 @@ export const FileCard = ({
 				reader.onloadend = () => {
 					const base64data = reader.result;
 					resolve(setPreview(base64data));
-					setIsLoading(false);
+					resolve(setIsLoading(false));
 				};
 			});
 		} else {
@@ -66,7 +64,6 @@ export const FileCard = ({
 	};
 
 	const deleteFileHandler = async () => {
-		dispatch(showLoading(true));
 		dispatch(getLoadingMessage('Удаление Файла'));
 
 		const res = await fetch(url, { method: 'DELETE' });
@@ -74,7 +71,7 @@ export const FileCard = ({
 		if (!res.ok) return;
 
 		dispatch(rerenderPage());
-		dispatch(showLoading(true));
+		dispatch(getLoadingMessage(''));
 	};
 
 	return (

@@ -5,9 +5,7 @@ const initialState = {
 	rerenderPage: true,
 	filesAmount: 0,
 	errorMessage: '',
-	showErrorWindow: false,
 	loadingMessage: '',
-	showLoadingWindow: false,
 };
 
 const uiSlice = createSlice({
@@ -26,14 +24,8 @@ const uiSlice = createSlice({
 		getErrorMessage(state, action) {
 			state.errorMessage = action.payload;
 		},
-		showError(state, action) {
-			state.showErrorWindow = action.payload;
-		},
 		getLoadingMessage(state, action) {
 			state.loadingMessage = action.payload;
-		},
-		showLoading(state, action) {
-			state.showLoadingWindow = action.payload;
 		},
 	},
 });
@@ -42,9 +34,7 @@ export const {
 	rerenderPage,
 	setFilesAmount,
 	getErrorMessage,
-	showError,
 	getLoadingMessage,
-	showLoading,
 } = uiSlice.actions;
 
 export { uiSlice };

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import closeIcon from '../../assets/closeErrorIcon.svg';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { showError } from '../../store/uiSlice';
+import { getErrorMessage } from '../../store/uiSlice';
 import { useEffect } from 'react';
 
 export const ErrorWindow = () => {
@@ -11,7 +11,7 @@ export const ErrorWindow = () => {
 
 	useEffect(() => {
 		setTimeout(() => {
-			dispatch(showError(false));
+			dispatch(getErrorMessage(''));
 		}, 4000);
 	}, []);
 
@@ -30,7 +30,7 @@ export const ErrorWindow = () => {
 				{errorMessage}
 			</p>
 			<button
-				onClick={() => dispatch(showError(false))}
+				onClick={() => dispatch(getErrorMessage(''))}
 				className="pointer border-none bg-none outline-none absolute top-[15px] right-[15px]"
 			>
 				<img src={closeIcon} alt="close-icon" />

@@ -8,20 +8,16 @@ import { AnimatePresence } from 'framer-motion';
 import { LoadingWindow } from '../../components/LoadingWindow/LoadingWindow';
 
 export const Store = () => {
-	const showErrorWindow = useAppSelector((state) => state.ui.showErrorWindow);
-	const showLoadingWindow = useAppSelector(
-		(state) => state.ui.showLoadingWindow
-	);
+	const errorMessage = useAppSelector((state) => state.ui.errorMessage);
+	const loadingMessage = useAppSelector((state) => state.ui.loadingMessage);
 
 	return (
 		<div className={s.wrapper}>
 			<Sidebar />
 			<Main />
+			<AnimatePresence>{errorMessage && <ErrorWindow />}</AnimatePresence>
 			<AnimatePresence>
-				{showErrorWindow && <ErrorWindow />}
-			</AnimatePresence>
-			<AnimatePresence>
-				{showLoadingWindow && <LoadingWindow />}
+				{loadingMessage && <LoadingWindow />}
 			</AnimatePresence>
 		</div>
 	);

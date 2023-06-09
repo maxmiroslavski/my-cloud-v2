@@ -24,7 +24,7 @@ export const ProfileWindow = () => {
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
 			transition={{ duration: 0.2 }}
-			className="absolute w-[300px] h-[250px] bg-White right-0 p-[20px]"
+			className="absolute w-[300px] h-[250px] bg-White right-0 p-[20px] z-10"
 		>
 			<Heading fontSize="24px">Профиль</Heading>
 
