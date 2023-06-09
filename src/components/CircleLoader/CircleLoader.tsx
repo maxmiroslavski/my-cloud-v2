@@ -1,7 +1,6 @@
 import s from './CircleLoader.module.css';
 import { motion } from 'framer-motion';
 import { ICircleLoader } from './CircleLoader.interface';
-import cs from 'classnames';
 
 export const CircleLoader = ({ className, ...props }: ICircleLoader) => {
 	return (
