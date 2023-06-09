@@ -12,6 +12,8 @@ export const ProfileWindow = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
+	const userEmail = sessionStorage.getItem('userEmail');
+
 	const logoutHandler = () => {
 		dispatch(toggleProfileWindow());
 		dispatch(logout());
@@ -29,14 +31,16 @@ export const ProfileWindow = () => {
 			<Heading fontSize="24px">Профиль</Heading>
 
 			<div className="flex flex-col items-center">
-				<div className="profileButton mt-[10px]">М</div>
+				<div className="profileButton mt-[10px]">
+					{userEmail?.split('')[0].toUpperCase()}
+				</div>
 
 				<Heading className="mt-[15px]" fontSize="20px">
 					User Name
 				</Heading>
 
 				<Span className="text-Gray mt-[5px]" fontSize="16px">
-					user@test.ru
+					{userEmail}
 				</Span>
 
 				<Button

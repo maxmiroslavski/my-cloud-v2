@@ -27,6 +27,9 @@ const uiSlice = createSlice({
 		getLoadingMessage(state, action) {
 			state.loadingMessage = action.payload;
 		},
+		getUserEmail(_, action) {
+			sessionStorage.setItem('userEmail', action.payload);
+		},
 	},
 });
 export const {
@@ -35,6 +38,7 @@ export const {
 	setFilesAmount,
 	getErrorMessage,
 	getLoadingMessage,
+	getUserEmail,
 } = uiSlice.actions;
 
 export { uiSlice };

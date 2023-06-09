@@ -9,6 +9,7 @@ import { Files } from './Files/Files';
 export const Main = () => {
 	const dispatch = useAppDispatch();
 	const showWindow = useAppSelector((state) => state.ui.showProfileWindow);
+	const userEmail = sessionStorage.getItem('userEmail');
 
 	return (
 		<div className="relative">
@@ -17,7 +18,7 @@ export const Main = () => {
 					onClick={() => dispatch(toggleProfileWindow())}
 					className="profileButton hover:bg-PrimaryHover"
 				>
-					M
+					{userEmail?.split('')[0].toUpperCase()}
 				</button>
 			</div>
 			<AnimatePresence>{showWindow && <ProfileWindow />}</AnimatePresence>

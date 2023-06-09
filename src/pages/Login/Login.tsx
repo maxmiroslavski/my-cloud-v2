@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { login } from '../../store/authSlice';
 import { EyeButton } from '../../components/EyeButton/EyeButton';
+import { getUserEmail } from '../../store/uiSlice';
 
 export const Login = () => {
 	const navigate = useNavigate();
@@ -78,6 +79,7 @@ export const Login = () => {
 		sessionStorage.setItem('idToken', resData.idToken);
 		sessionStorage.setItem('email', resData.email);
 		dispatch(login(resData.idToken));
+		dispatch(getUserEmail(enteredData.email));
 
 		navigate('/store');
 	};
