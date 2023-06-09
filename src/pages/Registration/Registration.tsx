@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { EyeButton } from '../../components/EyeButton/EyeButton';
 
 export const Registration = () => {
 	const navigate = useNavigate();
@@ -32,6 +33,7 @@ export const Registration = () => {
 		resolver: zodResolver(schema),
 	});
 
+	const [showPassword, setShowPassword] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -125,12 +127,17 @@ export const Registration = () => {
 							Пароль
 						</label>
 						<input
+							type={showPassword ? 'text' : 'password'}
 							placeholder="Пароль"
 							className={cn(
 								'authenticationInput',
 								errors.password && 'inputError'
 							)}
 							{...register('password')}
+						/>
+						<EyeButton
+							showPassword={showPassword}
+							onClick={() => setShowPassword(!showPassword)}
 						/>
 						{errors.password && (
 							<ErrorMessage

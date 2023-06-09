@@ -10,7 +10,6 @@ import { useAppSelector } from '../../../../hooks/useAppSelector';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
 import { AnimatePresence } from 'framer-motion';
 import { setFilesAmount } from '../../../../store/uiSlice';
-import { getLoadingMessage } from '../../../../store/uiSlice';
 
 export const Files = () => {
 	const dispatch = useAppDispatch();

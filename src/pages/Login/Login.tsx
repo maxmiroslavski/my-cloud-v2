@@ -16,6 +16,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { login } from '../../store/authSlice';
+import { EyeButton } from '../../components/EyeButton/EyeButton';
 
 export const Login = () => {
 	const navigate = useNavigate();
@@ -34,6 +35,7 @@ export const Login = () => {
 		resolver: zodResolver(schema),
 	});
 
+	const [showPassword, setShowPassword] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -121,12 +123,17 @@ export const Login = () => {
 							Пароль
 						</label>
 						<input
+							type={showPassword ? 'text' : 'password'}
 							placeholder="Пароль"
 							className={cn(
 								'authenticationInput',
 								errors.password && 'inputError'
 							)}
 							{...register('password')}
+						/>
+						<EyeButton
+							showPassword={showPassword}
+							onClick={() => setShowPassword(!showPassword)}
 						/>
 						{errors.password && (
 							<ErrorMessage
