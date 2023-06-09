@@ -23,8 +23,6 @@ export const Files = () => {
 	const getData = async () => {
 		const res = await listAll(ref(storage, `${email}`));
 
-		console.log(res);
-
 		const arr = [];
 
 		for (const item of res.items) {

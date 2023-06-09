@@ -61,8 +61,6 @@ export const Login = () => {
 			}
 		);
 
-		console.log(res);
-
 		if (!res.ok) {
 			setIsError(true);
 			setIsLoading(false);
@@ -70,8 +68,6 @@ export const Login = () => {
 		}
 
 		const resData = await res.json();
-
-		console.log(resData);
 
 		setIsError(false);
 		setIsLoading(false);
@@ -83,8 +79,6 @@ export const Login = () => {
 
 		navigate('/store');
 	};
-
-	console.log(isError);
 
 	return (
 		<div className="authenticationPage">
